@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrandSuite - A New Vision for AI-Powered Productivity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        // Set theme on initial load
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark')
+        } else {
+          document.documentElement.classList.remove('dark')
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA;
+        }
+        .dark body {
+            background-color: #111827;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-card {
+            background: rgba(31, 41, 55, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: gradient-animation 5s ease-in-out infinite;
+        }
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .roadmap-step {
+            position: relative;
+            padding-left: 3rem;
+            padding-bottom: 2.5rem;
+            border-left: 2px solid #e5e7eb;
+        }
+        .dark .roadmap-step {
+            border-left-color: #374151;
+        }
+        .roadmap-step:last-child {
+            border-left: 2px solid transparent;
+            padding-bottom: 0;
+        }
+        .roadmap-dot {
+            position: absolute;
+            left: -0.5rem;
+            top: 0.25rem;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 9999px;
+            border: 3px solid #F8F9FA;
+        }
+        .dark .roadmap-dot {
+            border-color: #111827;
+        }
+        .detail-list li {
+            @apply pl-4 border-l-2 border-gray-200 dark:border-gray-700;
+        }
+    </style>
+</head>
+<body class="text-gray-800 dark:text-gray-200">
+
+    <!-- Header -->
+    <header class="bg-white/70 dark:bg-gray-900/70 backdrop-blur-lg sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-900 dark:text-white">
+                Brand<span class="text-blue-500">Suite</span>
+            </a>
+            <div class="hidden lg:flex items-center space-x-8">
+                <a href="#products" class="text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition">Products</a>
+                <a href="#roadmap" class="text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition">Roadmap</a>
+                <a href="#funding" class="text-gray-600 hover:text-blue-500 dark:text-gray-300 dark:hover:text-blue-400 transition">Funding</a>
+            </div>
+            <div class="flex items-center">
+                 <button id="theme-toggle" class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 mr-4">
+                    <svg id="theme-toggle-dark-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.707.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM10 16a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM3.05 4.54a1 1 0 00-1.414 1.414l.707.707a1 1 0 001.414-1.414l-.707-.707zM16.95 4.54a1 1 0 011.414 0l.707.707a1 1 0 11-1.414 1.414l-.707-.707a1 1 0 010-1.414zM12 10a2 2 0 11-4 0 2 2 0 014 0zM4.54 16.95a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+                <a href="#contact" class="hidden lg:inline-block bg-blue-600 text-white px-5 py-2 rounded-full font-semibold hover:bg-blue-700 transition-colors">Get Started</a>
+                <button id="mobile-menu-button" class="lg:hidden text-gray-700 dark:text-gray-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden px-6 pb-4">
+            <a href="#products" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-500">Products</a>
+            <a href="#roadmap" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-500">Roadmap</a>
+            <a href="#funding" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-blue-500">Funding</a>
+            <a href="#contact" class="block mt-2 bg-blue-600 text-white text-center px-4 py-2 rounded-full hover:bg-blue-700">Get Started</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative py-24 md:py-40 overflow-hidden">
+            <div class="absolute inset-0 bg-grid-gray-200/50 dark:bg-grid-gray-700/20 [mask-image:linear-gradient(to_bottom,white_50%,transparent_100%)]"></div>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-6">
+                    The Future of Creation is 
+                    <span class="gradient-text">Integrated.</span>
+                </h1>
+                <p class="mt-6 text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                    We're building an interconnected suite of AI-powered tools designed to streamline your workflow from initial idea to final deployment.
+                </p>
+                <div class="mt-10 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#roadmap" class="w-full sm:w-auto bg-blue-600 text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-blue-700 transition-transform hover:scale-105 shadow-lg shadow-blue-500/20">
+                        Explore The Roadmap
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Suite Section -->
+        <section id="products" class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">One Ecosystem, Limitless Potential</h2>
+                    <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Our products are powerful alone, but revolutionary together.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Product 1 -->
+                    <div class="group relative bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                        <div class="absolute -top-8 -right-8 w-24 h-24 bg-blue-500/10 dark:bg-blue-500/20 rounded-full group-hover:scale-[8] transition-transform duration-500 ease-in-out"></div>
+                        <div class="relative z-10">
+                            <div class="mb-4 bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400 w-12 h-12 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">AI Code Compiler</h3>
+                            <p class="text-gray-600 dark:text-gray-400">A smart environment for HTML, CSS, & JS with live preview, AI assistance, and one-click sharing.</p>
+                        </div>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="group relative bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                         <div class="absolute -top-8 -right-8 w-24 h-24 bg-purple-500/10 dark:bg-purple-500/20 rounded-full group-hover:scale-[8] transition-transform duration-500 ease-in-out"></div>
+                        <div class="relative z-10">
+                            <div class="mb-4 bg-purple-100 dark:bg-purple-900/50 text-purple-600 dark:text-purple-400 w-12 h-12 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Website/App Builder</h3>
+                            <p class="text-gray-600 dark:text-gray-400">An intuitive builder that integrates with our compiler, turning visual designs into clean code instantly.</p>
+                        </div>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="group relative bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden">
+                         <div class="absolute -top-8 -right-8 w-24 h-24 bg-pink-500/10 dark:bg-pink-500/20 rounded-full group-hover:scale-[8] transition-transform duration-500 ease-in-out"></div>
+                        <div class="relative z-10">
+                            <div class="mb-4 bg-pink-100 dark:bg-pink-900/50 text-pink-600 dark:text-pink-400 w-12 h-12 rounded-lg flex items-center justify-center">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">PDF/Docs Summarizer</h3>
+                            <p class="text-gray-600 dark:text-gray-400">An AI tool to distill key information from documents, providing content and insights for your projects.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Detailed Roadmap Section -->
+        <section id="roadmap" class="py-20 md:py-28 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Our Blueprint for the Future</h2>
+                    <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-20">
+                        Our journey is mapped across four strategic phases, each building upon the last.
+                    </p>
+                </div>
+                
+                <div>
+                    <!-- Phase 1 -->
+                    <div class="roadmap-step">
+                        <div class="roadmap-dot bg-blue-500"></div>
+                        <p class="text-sm font-semibold text-blue-500 mb-1">Phase 1 (Months 0-6)</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Foundation & MVP</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">In this initial phase, our entire focus is on building a solid foundation. We will validate our core concept by developing a Minimum Viable Product (MVP) of the AI Code Compiler. This isn't just about writing code; it's about establishing a professional brand identity, defining our target audience, and setting up the legal and technical infrastructure for future growth.</p>
+                        <h4 class="font-semibold text-gray-800 dark:text-gray-100 mb-3">Key Actions & Deliverables:</h4>
+                        <ul class="space-y-3 detail-list">
+                           <li><strong class="text-gray-700 dark:text-gray-200">Brand Strategy:</strong> Define our brand voice, messaging, and target audience personas. Develop a complete visual style guide and secure all relevant domains and social media handles.</li>
+                           <li><strong class="text-gray-700 dark:text-gray-200">Product Development:</strong> Launch the AI Code Compiler MVP, focusing on a core, high-impact feature like "Generate Code from Prompt" to showcase immediate value.</li>
+                           <li><strong class="text-gray-700 dark:text-gray-200">Technical Setup:</strong> Finalize the tech stack (e.g., React, Node.js, PostgreSQL) and integrate analytics tools from day one to track user behavior and inform decisions.</li>
+                           <li><strong class="text-gray-700 dark:text-gray-200">Legal & Admin:</strong> Complete company registration and draft comprehensive Terms of Service and Privacy Policy documents that are transparent about data usage.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Phase 2 -->
+                    <div class="roadmap-step">
+                        <div class="roadmap-dot bg-purple-500"></div>
+                        <p class="text-sm font-semibold text-purple-500 mb-1">Phase 2 (Months 7-12)</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Launch & Traction</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">With the MVP complete, this phase is about launching to the public and building our first wave of dedicated users. The goal is to create a tight feedback loop, foster a strong community, and use data-driven insights to begin development on our second product, the Website/App Builder.</p>
+                        <h4 class="font-semibold text-gray-800 dark:text-gray-100 mb-3">Key Actions & Deliverables:</h4>
+                         <ul class="space-y-3 detail-list">
+                           <li><strong class="text-gray-700 dark:text-gray-200">Go-to-Market:</strong> Execute a strategic launch on platforms like Product Hunt, supported by a pre-launch hype campaign and content marketing to build an initial audience.</li>
+                           <li><strong class="text-gray-700 dark:text-gray-200">Community Building:</strong> Establish and grow an active user community on Discord or Slack. Foster engagement through weekly challenges, Q&A sessions, and by actively responding to feedback.</li>
+                           <li><strong class="text-gray-700 dark:text-gray-200">Feedback Loop:</strong> Implement a public feature voting system (e.g., Canny.io) to give users a voice and ensure we are building what the market truly wants.</li>
+                           <li><strong class="text-gray-700 dark:text-gray-200">Product #2 Development:</strong> Begin building the Website Builder MVP, focusing on the critical "Eject to Compiler" feature that will form the core of our integrated suite.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Phase 3 -->
+                    <div class="roadmap-step">
+                        <div class="roadmap-dot bg-pink-500"></div>
+                        <p class="text-sm font-semibold text-pink-500 mb-1">Phase 3 (Months 13-24)</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Growth & Monetization</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">This phase marks our transition from a promising new product to a sustainable business. We will launch our full product suite, introduce a multi-tiered pricing model, and double down on our key differentiator: seamless integration. The focus shifts to user growth, revenue generation, and proving product-market fit.</p>
+                         <h4 class="font-semibold text-gray-800 dark:text-gray-100 mb-3">Key Actions & Deliverables:</h4>
+                         <ul class="space-y-3 detail-list">
+                           <li><strong class="text-gray-700 dark:text-gray-200">Product Suite Expansion:</strong> Launch the public versions of the Website Builder and the PDF/Docs Summarizer, marketing them to our existing user base and new audiences.</li>
+                           <li><strong class="text-gray-700 dark:text-gray-200">Monetization:</strong> Implement a Freemium pricing model with clearly defined Free, Pro (e.g., $15/mo), and Team tiers to cater to different user needs and drive revenue.</li>
+                           <li><strong class="text-gray-700 dark:text-gray-200">Deep Integration:</strong> Develop and market unique cross-product workflows, such as using the Summarizer to generate content that can be styled and deployed with the Builder and Compiler.</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Phase 4 -->
+                    <div class="roadmap-step">
+                        <div class="roadmap-dot bg-amber-500"></div>
+                        <p class="text-sm font-semibold text-amber-500 mb-1">Phase 4 (Months 25+)</p>
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3">Scaling & Expansion</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">With a proven business model and a growing user base, this phase is about scaling aggressively. We will expand our team, our market reach, and our platform's capabilities to establish BrandSuite as a leader in the AI-powered productivity space. The goal is to build a moat around our business through network effects and a strong technical ecosystem.</p>
+                         <h4 class="font-semibold text-gray-800 dark:text-gray-100 mb-3">Key Actions & Deliverables:</h4>
+                         <ul class="space-y-3 detail-list">
+                           <li><strong class="text-gray-700 dark:text-gray-200">Team Scaling:</strong> Make strategic hires in key growth areas, including a Head of Growth, Customer Success Managers, and Senior DevOps Engineers to support our expansion.</li>
+                           <li><strong class="text-gray-700 dark:text-gray-200">Market Expansion:</strong> Pursue internationalization (i18n) by localizing the platform for key global markets and develop a high-ticket Enterprise Tier with features like SSO and advanced security.</li>
+                           <li><strong class="text-gray-700 dark:text-gray-200">Ecosystem Development:</strong> Launch a public API to enable third-party integrations and create a marketplace for users to buy and sell templates, plugins, and components, fostering a vibrant ecosystem.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Funding Roadmap Section -->
+        <section id="funding" class="py-20 md:py-28">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Fueling Our Growth</h2>
+                    <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-16">
+                        Our funding strategy aligns with our development milestones, ensuring we seek capital at the right time with proven traction.
+                    </p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="glass-card p-8 rounded-2xl text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Pre-Seed</h3>
+                        <p class="font-semibold text-blue-500 mb-4">Completes Phase 1</p>
+                        <p class="text-gray-600 dark:text-gray-400">Self-funding to build the MVP, establish the brand, and acquire our first 1,000 users to prove the concept is viable.</p>
+                    </div>
+                    <div class="glass-card p-8 rounded-2xl text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Seed</h3>
+                        <p class="font-semibold text-purple-500 mb-4">Funds Phases 2 & 3</p>
+                        <p class="text-gray-600 dark:text-gray-400">Seeking capital to build out the full product suite, find product-market fit, and begin monetization.</p>
+                    </div>
+                     <div class="glass-card p-8 rounded-2xl text-center">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Series A</h3>
+                        <p class="font-semibold text-pink-500 mb-4">Funds Phase 4</p>
+                        <p class="text-gray-600 dark:text-gray-400">With proven product-market fit, we will seek major VC funding to scale aggressively and expand internationally.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 md:py-28 bg-white dark:bg-gray-900">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Join Us on Our Journey</h2>
+                <p class="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10">
+                    Whether you're a potential user, partner, or investor, we'd love to connect. Let's build the future of productivity together.
+                </p>
+                <a href="mailto:contact@brandsuite.com" class="bg-blue-600 text-white px-10 py-4 rounded-full font-semibold text-xl hover:bg-blue-700 transition-transform hover:scale-105 inline-block shadow-lg shadow-blue-500/20">
+                    Get In Touch
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-lg font-bold text-gray-900 dark:text-white">BrandSuite</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-500 hover:text-blue-500">Twitter</a>
+                    <a href="#" class="text-gray-500 hover:text-blue-500">LinkedIn</a>
+                    <a href="#" class="text-gray-500 hover:text-blue-500">Product Hunt</a>
+                </div>
+                <p class="mt-4 md:mt-0 text-gray-500">&copy; 2025 BrandSuite. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
+        for (let link of mobileMenuLinks) {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        }
+
+        // Dark mode toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (localStorage.getItem('theme')) {
+                if (localStorage.getItem('theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
